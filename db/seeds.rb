@@ -52,6 +52,9 @@ Character.create(first_name: "Donald", last_name: "Dunn", sex: "M")
 Character.create(first_name: "Poppy", last_name: "Moore", sex: "F")
 Character.create(first_name: "Freddie", last_name: "Kingsely", sex: "M")
 
+
+
+
 # QUOTES
 
 Quote.create(line: "Good morning, and in case I don't see ya, good afternoon, good evening, and good night!" , movie_id: 1, character_id: 1)
@@ -68,3 +71,18 @@ Quote.create(line: "I'm fucking miserable. I had to get up at 10 o' clock this m
 
 Quote.create(line: "Go fuck yourself San Diego." , movie_id: 5, character_id: 9)
 Quote.create(line: "Well, you...have bad hair." , movie_id: 5, character_id: 10)
+
+Quote.create(line: "This is my gift, my curse.", movie_id: 6, character_id: 11)
+Quote.create(line: "I know there will be risks, but I want to face them with you", movie_id: 6, character_id: 12)
+
+Quote.create(line: "Frankly, my dear, I don't give a damn.", movie_id: 7, character_id: 13)
+Quote.create(line: "As God is my witness, I'll never be hungry again.", movie_id: 7, character_id: 14)
+
+Quote.create(line: "Call me by my dream name. Call me!", movie_id: 8, character_id: 15)
+Quote.create(line: "The power of Christ compels you!", movie_id: 8, character_id: 16)
+
+Quote.create(line: "I hate Illinois Nazis!", movie_id: 9, character_id: 17)
+Quote.create(line: "Turn goat piss into gasoline...", movie_id: 9, character_id: 18)
+
+Quote.create(line: "I didn't start it, it wasn't my fault, and if this were America, I would sue.", movie_id: 10, character_id: 19)
+Quote.create(line: "No, just English.", movie_id: 10, character_id: 20)
