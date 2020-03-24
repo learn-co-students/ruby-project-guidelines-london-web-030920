@@ -1,4 +1,4 @@
-Player.destroy_all, Team.destroy_all, Contract.destroy_all
+# Player.destroy_all, Team.destroy_all, Contract.destroy_all
 
 player_1 = Player.create(name: "Ronaldo", age: 35, position: "Striker", injured: false)
 player_2 = Player.create(name: "Messi",age: 32, position: "Striker", injured: false)
