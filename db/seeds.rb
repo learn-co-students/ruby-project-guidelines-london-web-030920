@@ -1,3 +1,5 @@
+# MOVIES
+
 Movie.create(title: "The Truman Show", year: 1998, genre: "Drama")
 
 Movie.create(title: "Star Wars: Empire Strikes Back", year: 1980, genre: "SciFi")
@@ -17,6 +19,8 @@ Movie.create(title: "The Exorcist", year: 1973, genre: "Horror")
 Movie.create(title: "Blues Brothers", year: 1980, genre: "Comedy")
 
 Movie.create(title: "Wild Child", year: 2008, genre: "Rom-Com")
+
+# CHARACTERS
 
 Character.create(first_name: "Truman" , last_name: "Burbank" , sex: "M" )
 Character.create(first_name: "Hannah" , last_name: "Gill" , sex: "F" )
@@ -47,3 +51,20 @@ Character.create(first_name: "Donald", last_name: "Dunn", sex: "M")
 
 Character.create(first_name: "Poppy", last_name: "Moore", sex: "F")
 Character.create(first_name: "Freddie", last_name: "Kingsely", sex: "M")
+
+# QUOTES
+
+Quote.create(line: "Good morning, and in case I don't see ya, good afternoon, good evening, and good night!" , movie_id: 1, character_id: 1)
+Quote.create(line: "How can anyone expect me to carry on under these conditions? It's unprofessional!" , movie_id: 1, character_id: 2)
+
+Quote.create(line: "That's not true! That's impossible!" , movie_id: 2, character_id: 3)
+Quote.create(line: "No, I am your Father." , movie_id: 2, character_id: 4)
+
+Quote.create(line: "If you can't fix it, Jack, you gotta stand it." , movie_id: 3, character_id: 5)
+Quote.create(line: "I wish I knew how to quit you." , movie_id: 3, character_id: 6)
+
+Quote.create(line: "It's the fucking Catalina Wine Mixer." , movie_id: 4, character_id: 7)
+Quote.create(line: "I'm fucking miserable. I had to get up at 10 o' clock this morning!" , movie_id: 4, character_id: 8)
+
+Quote.create(line: "Go fuck yourself San Diego." , movie_id: 5, character_id: 9)
+Quote.create(line: "Well, you...have bad hair." , movie_id: 5, character_id: 10)
