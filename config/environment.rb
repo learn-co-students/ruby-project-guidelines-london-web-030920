@@ -11,4 +11,8 @@ ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/develo
 require_all 'lib'
 
 require_all 'app/models'
+<<<<<<< HEAD
 require_relative 'db/seeds.rb'
+=======
+# require_relative 'db/seeds.rb'
+>>>>>>> 53b59bd2858c640b5fc555bcdf6a64e5ed1c7b71
