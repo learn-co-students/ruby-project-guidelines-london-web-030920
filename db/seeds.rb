@@ -47,3 +47,21 @@ Character.create(first_name: "Donald", last_name: "Dunn", sex: "M")
 
 Character.create(first_name: "Poppy", last_name: "Moore", sex: "F")
 Character.create(first_name: "Freddie", last_name: "Kingsely", sex: "M")
+
+
+
+# Quote.create(line: "This is my gift, my curse.", movie_id: 6, character_id: )
+# Quote.create(line: "I know there will be risks, but I want to face them with you", movie_id: 6, character_id: )
+
+# Quote.create(line: "Frankly, my dear, I don't give a damn.", movie_id: 7, character_id: )
+# Quote.create(line: "As God is my witness, I'll never be hungry again.", movie_id: 7, character_id: )
+
+# Quote.create(line: "Call me by my dream name. Call me!", movie_id: 8, character_id: )
+# Quote.create(line: "The power of Christ compels you!", movie_id: 8, character_id: )
+
+# Quote.create(line: "I hate Illinois Nazis!", movie_id: 9, character_id: )
+# Quote.create(line: "Turn goat piss into gasoline...", movie_id: 9, character_id: )
+
+# Quote.create(line: "I didn't start it, it wasn't my fault, and if this were America, I would sue.", movie_id: 10, character_id: )
+# Quote.create(line: "No, just English.", movie_id: 10, character_id: )
+
