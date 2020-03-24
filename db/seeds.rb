@@ -12,7 +12,7 @@ Movie.create(title: "Spider-Man", year: 2002, genre: "Action")
 
 Movie.create(title: "Gone with the Wind", year: 1939, genre: "War")
 
-Movie.create(title: "Night of the Living Dead", year: 1968, genre: "Horror")
+Movie.create(title: "The Exorcist", year: 1973, genre: "Horror")
 
 Movie.create(title: "Blues Brothers", year: 1980, genre: "Comedy")
 
@@ -22,4 +22,17 @@ Movie.create(title: "Wild Child", year: 2008, genre: "Rom-Com")
 # Quote.create(line: "malibu moment", movie_id: 10, character_id: 1)
 
 
-# Character.create(first_name: "Poppy", last_name: "Moore", sex: "F")
+Character.create(first_name: "Peter", last_name: "Parker", sex: "M")
+Character.create(first_name: "Mary", last_name: "Watson", sex: "F")
+
+Character.create(first_name: "Rhett", last_name: "Butler", sex: "M")
+Character.create(first_name: "Scarlet", last_name: "O'Hara", sex: "F")
+
+Character.create(first_name: "Regan", last_name: "MacNeil", sex: "F")
+Character.create(first_name: "Damien", last_name: "Karras", sex: "M")
+
+Character.create(first_name: "Joilet", last_name: "Jake", sex: "M")
+Character.create(first_name: "Donald", last_name: "Dunn", sex: "M")
+
+Character.create(first_name: "Poppy", last_name: "Moore", sex: "F")
+Character.create(first_name: "Freddie", last_name: "Kingsely", sex: "M")
