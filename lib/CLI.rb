@@ -33,6 +33,8 @@ class CommandLineInterface
       puts "-------------"
       puts "l - list all abjects"
       puts "movies - list all movies"
+      puts "quotes - list all quotes"
+      puts "characters - list all characters"
     end
 
     def user_command(command)
@@ -44,13 +46,17 @@ class CommandLineInterface
         puts Movie.all.map{|m| m.title}
       # when expression "quotes"
       #   list_all_quotes
-      # when expression "characters"
-      #   list_all_characters
-      # when expression "random"
-      #   random_quote
+      when "quotes"
+        puts Quote.all.map{|q| q.line}
+      when "characters"
+       puts Character.all.map{|c| "#{c.first_name} #{c.last_name}"}
+      when "random"
+       puts Quote.all.sample
       # when expression "quote finder"
-      #   quote_finder
-      # when expression "movie finder"
+      when "find quote"
+        puts "Type in your quote"
+        quote = gets.chomp
+        Quote.find_movie(quote)
       #   movie_finder
       # when expression "character finder"
       #   character_finder
