@@ -2,33 +2,64 @@ class Team < ActiveRecord::Base
     has_many :contracts
     has_many :players, through: :contracts
 
-    def team_by_contract
-        hash = {}
-        Team.all.map {|team|hash["#{team.name}"] =  team.contracts}
-        hash
-        end
+  
+    def team_contract
+        Contract.all.select {|contract| contract.team_id == self.id}
+     end
 
+     def total_of_team_fee
+        self.team_contract.sum {|contract| contract.transfer_fee}
+     end
 
-    def most_expensive_player_on_team 
-        self.players.find {|player| player.contracts.max_by{|contract| contract.transfer_fee}}.name
+     def total_of_team_wage
+        self.team_contract.sum {|contract| contract.wage}
+     end
+
+     def most_expensive_player
+        player_contract = team_contract.max_by{|contract| contract.transfer_fee}
+        Player.all.find {|player| player.id == player_contract.player_id}.name
+     end
+
+     def highest_earner
+        player_contract = team_contract.max_by{|contract| contract.wage}
+        Player.all.find {|player| player.id == player_contract.player_id}.name
+     end
+
+     def lowest_earner
+        player_contract = team_contract.min_by{|contract| contract.transfer_fee}
+        Player.all.find {|player| player.id == player_contract.player_id}.name
+     end
+
+     def average_wage_of_team
+        player_contract = team_contract.map{|contract| contract.wage}.sum
+        player_contract/self.players.length
+     end
+
+     def oldest_player
+        self.players.max_by {|player| player.age}.name
+     end
+
+     def youngest_player
+        self.players.min_by {|player| player.age}.name
+     end
+
+     def all_injuries
+        self.players.select {|player| player.injured == true}
+     end
+
+     def injured_players
+        players_injured = all_injuries.map {|player| player.name}
+        puts "#{players_injured.join(" and ")} are injured for #{self.name}!"
      end
     
-#most expensive team
-#most expensive player on team
-#highest earning player on team
-#cheapest team
-#least expensive player on team
-#most injuries
-#oldest player on team
-#youngest player on team
-#average wage of team
-#transfer fee
-#contract start before a certain date
+    def most_cup_wins
+     most_cups_won = Team.all.max_by {|team| team.cups_won}
+     most_cups_won.name
+    end
 
-#most cup wins
-def most_cup_wins
-    most_cup_wins = Team.all.max_by {|team| team.cups_won}
-    most_cup_wins.name
-end
+    def oldest_team
+        old_team = Team.all.min_by {|team| team.founded}
+        old_team.name
+    end
 
 end
