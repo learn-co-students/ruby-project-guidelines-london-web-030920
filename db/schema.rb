@@ -13,8 +13,7 @@
 ActiveRecord::Schema.define(version: 3) do
 
   create_table "characters", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
+    t.string "name"
     t.string "sex"
   end
 

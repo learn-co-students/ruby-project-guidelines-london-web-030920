@@ -22,35 +22,35 @@ Movie.create(title: "Wild Child", year: 2008, genre: "Rom-Com")
 
 # CHARACTERS
 
-Character.create(first_name: "Truman" , last_name: "Burbank" , sex: "M" )
-Character.create(first_name: "Hannah" , last_name: "Gill" , sex: "F" )
+Character.create(name: "Truman Burbank" , sex: "M" )
+Character.create(name: "Hannah Gill" , sex: "F" )
 
-Character.create(first_name: "Luke" , last_name: "Skywalker" , sex: "M" )
-Character.create(first_name: "Darth" , last_name: "Vader" , sex: "M" )
+Character.create(name: "Luke Skywalker" , sex: "M" )
+Character.create(name: "Darth Vader" , sex: "M" )
 
-Character.create(first_name: "Ennis" , last_name: "Del Mar" , sex: "M" )
-Character.create(first_name: "Jack" , last_name: "Twist" , sex: "M" )
+Character.create(name: "Ennis Del Mar" , sex: "M" )
+Character.create(name: "Jack Twist" , sex: "M" )
 
-Character.create(first_name: "Brennan" , last_name: "Huff" , sex: "M" )
-Character.create(first_name: "Dale" , last_name: "Doback" , sex: "M" )
+Character.create(name: "Brennan Huff" , sex: "M" )
+Character.create(name: "Dale Doback" , sex: "M" )
 
-Character.create(first_name: "Ron" , last_name: "Burgundy" , sex: "M" )
-Character.create(first_name: "Veronica" , last_name: "Corningstone" , sex: "F" )
+Character.create(name: "Ron Burgundy" , sex: "M" )
+Character.create(name: "Veronica Corningstone" , sex: "F" )
 
-Character.create(first_name: "Peter", last_name: "Parker", sex: "M")
-Character.create(first_name: "Mary", last_name: "Watson", sex: "F")
+Character.create(name: "Peter Parker", sex: "M")
+Character.create(name: "Mary-Jane Watson", sex: "F")
 
-Character.create(first_name: "Rhett", last_name: "Butler", sex: "M")
-Character.create(first_name: "Scarlet", last_name: "O'Hara", sex: "F")
+Character.create(name: "Rhett Butler", sex: "M")
+Character.create(name: "Scarlet O'Hara", sex: "F")
 
-Character.create(first_name: "Regan", last_name: "MacNeil", sex: "F")
-Character.create(first_name: "Damien", last_name: "Karras", sex: "M")
+Character.create(name: "Regan MacNeil", sex: "F")
+Character.create(name: "Damien Karras", sex: "M")
 
-Character.create(first_name: "Joilet", last_name: "Jake", sex: "M")
-Character.create(first_name: "Donald", last_name: "Dunn", sex: "M")
+Character.create(name: "Joilet Jake", sex: "M")
+Character.create(name: "Donald Dunn", sex: "M")
 
-Character.create(first_name: "Poppy", last_name: "Moore", sex: "F")
-Character.create(first_name: "Freddie", last_name: "Kingsely", sex: "M")
+Character.create(name: "Poppy Moore", sex: "F")
+Character.create(name: "Freddie Kingsely", sex: "M")
 
 
 
