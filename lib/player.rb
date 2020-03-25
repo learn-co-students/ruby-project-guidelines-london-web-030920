@@ -4,6 +4,10 @@ class Player < ActiveRecord::Base
     
 # most expensive player
 
+    def self.find_player(name) 
+        Player.all.find{|player| player.name == name}
+    end
+
 ####################ALL PLAYER METHODS ###################### ALL PLAYER METHODS #######################
 
     def self.all_players_by_contracts                       #creates a hash that gives all the players contracts
@@ -12,17 +16,17 @@ class Player < ActiveRecord::Base
         hash
     end
 
-    def self.player_contracts(name)                                             #find's players individual contracts by comparing the name inputted against the hash created in all_players_contracts
+    def self.player_contracts(name)                                                             #find's players individual contracts by comparing the name inputted against the hash created in all_players_contracts
         Player.all_players_by_contracts.find{|player, contract| name == player}
     end
 
     def self.most_expensive_wage
-        highest_wage = Contract.all.max{|contract|contract.wage}  #looks through all the contracts and returns the highest contract instance
+        highest_wage = Contract.all.max{|contract|contract.wage}                                #looks through all the contracts and returns the highest contract instance
     end
 
     def self.most_expensive_player
-        most_expensive = self.all.find{|player| player.id == most_expensive_wage.player_id} #finds the most expensive player instance by looking for the player_id matching the most_expensive_wage player_id
-        puts "#{most_expensive.name} = £#{self.most_expensive_wage.wage} per second" #returns the most_expensive player name and the most_expensive_wage amount
+        most_expensive = self.all.find{|player| player.id == most_expensive_wage.player_id}     #finds the most expensive player instance by looking for the player_id matching the most_expensive_wage player_id
+        puts "#{most_expensive.name} = £#{self.most_expensive_wage.wage} per second"            #returns the most_expensive player name and the most_expensive_wage amount
     end
 
     # def self.longest_injury
@@ -31,15 +35,12 @@ class Player < ActiveRecord::Base
     # end
 
         ######### INJURIES METHODS ############# INJURIES METHODS ###########
-
-    def self.find_injured_player_by_name(name)                                  
-        Player.all.find{|player| player.name == name}               #finds a specific player by the name entered
-    end
+   
 
     def injury_length                                                                            #calculates the number of days injury totals
         injury_length = self.injury_predicted_end.to_time.to_i - self.injury_start.to_time.to_i     #is making a variable that turns the predicted and end dates of injury into integers (in seconds) and takes the start away from the end
-        total_days_injured = injury_length / (60 * 60 * 24)         #takes the variable and divides it by a calculation that returns number of days
-        puts "#{total_days_injured} days"
+        total_days_injured = injury_length / (60 * 60 * 24)                                      #takes the variable and divides it by a calculation that returns number of days
+        total_days_injured
     end
 
     # def expected_days_from_injury_return(player)
@@ -75,3 +76,9 @@ class Player < ActiveRecord::Base
 # current contract
 
 end
+
+#####UNUSED METHODS ############## UNUSED METHODS ####################
+
+        # def self.player_injured(name) 
+        #     Player.all.find{|player| player.name == name}.injured?
+        # end   
