@@ -3,7 +3,8 @@ class CommandLineInterface
  
 
 def greet
-    puts "Welcome to Focus Football, the best resource for football information in the world! \n"
+    puts "Welcome to Focus Football, the best resource for football information in the world! "
+    puts ""
   end
 
     
@@ -13,10 +14,10 @@ def greet
     greet
     puts "Fancy checking in on your favourite player? Maybe seeing the current players in a team? How about their contracts?"
     prompt = TTY::Prompt.new
-    prompt.ask('What is your name?', default: ENV["Stranger"])
+    prompt.ask('What is your name?', default: ENV["USER"])
 
     choices = [
-      {name: 'Search all players', value: 1},
+      {name: 'Search for injured player', value: 1},
       {name: 'Search all teams', value: 2},
       {name: 'Search all contracts', value: 3},
       {name: "Exit", value: 4}]
@@ -25,7 +26,14 @@ def greet
 
         case user_input
     when 1
-          Player.all_players_by_contracts 
+      name = gets.chomp
+      player = Player.find_player(name)  
+      if !player.injured 
+        puts "#{player.name} is not currently injured."
+      else 
+        puts "#{player.name} is injured for #{player.injury_length} days"
+      end
+
       puts "Searching for all player related queries..."
     when 2
       # Functionality for Choice 2 goes here
@@ -36,11 +44,6 @@ def greet
 
     when 4
       are_you_sure = prompt.yes?('Are you sure?')
-    end
-
-    case are_you_sure
-    when "Y" 
-      puts "Have a great day"
     end
 
     end
