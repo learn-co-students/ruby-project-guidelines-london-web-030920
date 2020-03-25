@@ -3,48 +3,60 @@ class Player < ActiveRecord::Base
     has_many :teams, through: :contracts
     
 # most expensive player
-def most_expensive_wage
-    highest_wage = Contract.all.max{|contract|contract.wage}
-end
+    def self.most_expensive_wage
+        highest_wage = Contract.all.max{|contract|contract.wage}  #looks through all the contracts and returns the highest contract instance
+    end
 
-def most_expensive_player
-    most_expensive = Player.all.find{|player| player.id == highest_wage.player_id}
-    most_expensive.name
-end
-# longest injury
+    def self.most_expensive_player
+        most_expensive = self.all.find{|player| player.id == most_expensive_wage.player_id} #finds the most expensive player instance by looking for the player_id matching the most_expensive_wage player_id
+        puts "#{most_expensive.name} = £#{self.most_expensive_wage.wage} per second" #returns the most_expensive player name and the most_expensive_wage amount
+    end
+
     def self.longest_injury
         # self.all_injured_players.each{|player|player.injury.length}
 
     end
 
-    def self.find_injured_player_by_name(name)
-        Player.all.find{|player| player.name == name}
+        ######### INJURIES METHODS ############# INJURIES METHODS ###########
+
+    def self.find_injured_player_by_name(name)                                  
+        Player.all.find{|player| player.name == name}               #finds a specific player by the name entered
     end
 
-    def injury_length
-        injury_length = self.injury_predicted_end.to_time.to_i - self.injury_start.to_time.to_i
-        injury_length / (60 * 60 * 24)
+    def injury_length                                                           #calculates the number of days injury totals
+        injury_length = self.injury_predicted_end.to_time.to_i - self.injury_start.to_time.to_i  #is making a variable that turns the predicted and end dates of injury into integers (in seconds) and takes the start away from the end
+        total_days_injured = injury_length / (60 * 60 * 24)         #takes the variable and divides it by a calculation that returns number of days
+        puts "#{total_days_injured} days"
     end
 
-    def self.all_injured_players
+    def expected_days_from_injury_return(player)
+ 
+    end
+
+    def self.all_injured_players                                                #returns on separate lines each injured player in the players table
         all_injured_players = Player.all.select{|player| player.injured?}
        puts  all_injured_players.map{|player| player.name}
     end
+
+    ################## CONTRACT METHODS #################### CONTRACT METHODS #######################
+
 # most contracts at one team
 # most contracts
 
-def team
-current_team = self.teams.map{|team| team.name}
-current_team[0]
-end
+#################### INDIVIDUAL PLAYER METHODS ########### INDIVIDUAL PLAYER METHODS #######################
 
-def current_position
-self.position
-end
+    def team
+    current_team = self.teams.map{|team| team.name}    #returns players current team as a string by mapping through the teams played for and returning the first array element
+    current_team[0]
+    end
 
-def number_of_teams_played_for
-    self.teams.all.uniq.count
-end
+    def current_position       #returns current position
+    self.position
+    end
+
+    def number_of_teams_played_for  #looks at players teams, calculates the unique number of teams played for.
+        self.teams.all.uniq.count
+    end
 
 # injuries after date
 # current contract
