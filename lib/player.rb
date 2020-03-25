@@ -25,10 +25,10 @@ class Player < ActiveRecord::Base
         puts "#{most_expensive.name} = £#{self.most_expensive_wage.wage} per second" #returns the most_expensive player name and the most_expensive_wage amount
     end
 
-    def self.longest_injury
-        # self.all_injured_players.each{|player|player.injury.length}
+    # def self.longest_injury
+    #     # self.all_injured_players.each{|player|player.injury.length}
 
-    end
+    # end
 
         ######### INJURIES METHODS ############# INJURIES METHODS ###########
 
@@ -42,9 +42,9 @@ class Player < ActiveRecord::Base
         puts "#{total_days_injured} days"
     end
 
-    def expected_days_from_injury_return(player)
+    # def expected_days_from_injury_return(player)
 
-    end
+    # end
 
     def self.all_injured_players                                                #returns on separate lines each injured player in the players table
         all_injured_players = Player.all.select{|player| player.injured?}
