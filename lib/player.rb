@@ -8,6 +8,12 @@ class Player < ActiveRecord::Base
         Player.all.find{|player| player.name == name}
     end
 
+    def self.all_players
+            all_players = self.all.map{|player| player.name}
+            all_players.join(" ")
+            
+    end
+
 ####################ALL PLAYER METHODS ###################### ALL PLAYER METHODS #######################
 
     def self.all_players_by_contracts                       #creates a hash that gives all the players contracts
@@ -54,7 +60,7 @@ class Player < ActiveRecord::Base
 
     ################## CONTRACT METHODS #################### CONTRACT METHODS #######################
 
-# most contracts at one team
+
 # most contracts
 
 #################### INDIVIDUAL PLAYER METHODS ########### INDIVIDUAL PLAYER METHODS #######################
@@ -72,7 +78,6 @@ class Player < ActiveRecord::Base
         self.teams.all.uniq.count
     end
 
-# injuries after date
 # current contract
 
 end

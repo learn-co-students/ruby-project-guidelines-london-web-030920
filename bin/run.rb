@@ -13,4 +13,4 @@ contract_4 = Contract.fourth
 
 cli = CommandLineInterface.new
 cli.screen1
-
+cli.screen2_selection
