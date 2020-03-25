@@ -15,4 +15,3 @@ contract_2 = Contract.create(start_day: "2019/11/22", end_day: "2025/12/22", wag
 contract_3 = Contract.create(start_day: "2019/11/23", end_day: "2025/12/23", wage: 300000, transfer_fee: 30000, player_id: player_3.id,team_id: team_1.id)
 contract_4 = Contract.create(start_day: "2019/11/24", end_day: "2025/12/24", wage: 400000, transfer_fee: 40000, player_id: player_4.id,team_id: team_1.id)
 
-binding.pry
