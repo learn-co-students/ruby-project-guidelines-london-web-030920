@@ -25,5 +25,5 @@ contract_4 = Contract.fourth
 
 
 cli = CommandLineInterface.new
-cli.run
+cli.screen1
 
