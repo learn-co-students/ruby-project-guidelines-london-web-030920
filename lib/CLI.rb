@@ -3,6 +3,7 @@ class CommandLineInterface
     def opening_greeting
       puts ""
       puts "Welcome to Movie Quotes."
+      puts ""
       inner_greeting
     end
 
@@ -33,9 +34,10 @@ class CommandLineInterface
       puts "COMMAND LIST"
       puts "-------------"
       puts "l - list all abjects"
-      puts "movies - list all movies"
-      puts "quotes - list all quotes"
-      puts "characters - list all characters"
+      puts "m - list all movies"
+      puts "q - list all quotes"
+      puts "c - list all characters"
+      puts "f - find movie, quote or character"
     end
 
     def user_command(command)
@@ -43,35 +45,53 @@ class CommandLineInterface
 
       when "l"
         list_all_commands
-      when "movies"
+      when "m" #movie
         puts Movie.all.map{|m| m.title}
-      # when expression "quotes"
-      #   list_all_quotes
-      when "quotes"
+      when "q" #quotes
         puts Quote.all.map{|q| q.line}
-      when "characters"
+      when "c" #characters
        puts Character.all.map{|c| "#{c.first_name} #{c.last_name}"}
       when "random"
        puts Quote.all.sample
-      # when expression "quote finder"
-      when "find quote"
-        puts "Type in your quote"
-        quote = gets.chomp
-        Quote.find_movie(quote)
-      #   movie_finder
-      # when expression "character finder"
-      #   character_finder
-      # when expression "quote from movie"
-      #   list_all_movie_quotes
-      # when expression "characters from movie"
-      #   list_all_movie_character
-      # when expression "quotes from character"
-      #  list_all_character_quotes
-      # when expression "add quote and film"
-      #   add_quote_film
-      # when expression "delete quote" 
-      #   delete_quote
+      when "f" #find
+        find_by_character_movie_or_quote
+
+        # - movie finder 
+        # - character finder 
+
+        # - all character quotes
+        # - all movie quotes
+        # - all genre movies
+
+        # - add movie quote (find or create)
+        # - delete quote 
+        # - delete movie and quote 
+
+        # - oldest movie
+        # - 
+
     end
   end
 
+  def find_by_character_movie_or_quote 
+    puts ""
+    puts "Press 'q' to find by quote"
+    puts "Press 'm' to find by movie"
+    puts "Press 'm' to find by movie"
+    puts ""
+    command = gets.chomp
+    case command
+    when "q"
+      puts ""
+      puts "Type in your quote"
+      puts ""
+        quote = gets.chomp
+        # binding.pry
+        # found_quote = Quote.find_by(line: quote).movie.title
+        puts Quote.find_by(line: quote).movie.title
+    end
+  end
+
+
 end
+
