@@ -1,6 +1,7 @@
 class CommandLineInterface
 
     def opening_greeting
+      puts ""
       puts "Welcome to Movie Quotes."
       inner_greeting
     end
