@@ -1,3 +1,5 @@
+#################### GREETING AND KEY LISTS ###########################################
+
 class CommandLineInterface
 
   def opening_greeting
@@ -45,6 +47,7 @@ class CommandLineInterface
     puts "6. Find movie, quote or character"
     puts "7. Find or create quote"
     puts "8. Delete movie, quote or character"
+    puts "9. To try out the quiz!"
     
     puts "exit or x - To exit application"
   end
@@ -81,6 +84,8 @@ class CommandLineInterface
       find_or_create
     when "8" #delete
       delete
+    when "9" #delete
+      run_quiz 
     when "exit"
       puts ""
       a = Artii::Base.new :font => 'slant'
@@ -88,6 +93,9 @@ class CommandLineInterface
       exit 0
   end
 end
+
+#################### GREETING AND KEY LISTS ###########################################
+############################ METHODS ##################################################
 
 def find_by_character_movie_or_quote 
   puts ""
@@ -246,6 +254,76 @@ end
     puts ""
     puts "List of #{title}:"
     puts "----------------"
+  end
+
+################# quiz #####################
+  
+  
+  def quiz 
+    counter = 0
+    user_points = 0
+
+    while counter < 10
+     
+      puts "Question #{counter + 1}. What movie is this quote from?"
+      puts ""
+      quote = Quote.all.sample.line
+      puts quote
+      puts ""
+      puts "Put your answer here:"
+      puts ""
+      movie_title = gets.chomp
+      puts ""
+      found_movie = Movie.find_by(title: movie_title)
+      if !found_movie
+        puts "-----------------------------------------------------------"
+        puts "Oh no! Thats not right. Your score is still #{user_points}!"
+        puts "-----------------------------------------------------------"
+      else
+        if found_movie.quotes.select{ |q| q == quote}
+          user_points += 1
+          puts ""
+          puts "--------------------------------------------"
+          puts "Well done! Your score is now #{user_points}!"
+          puts "--------------------------------------------"
+          puts ""
+        else
+          puts "-----------------------------------------------------------"
+          puts "Oh no! Thats not right. Your score is still #{user_points}!"
+          puts "-----------------------------------------------------------"
+          puts ""
+        end
+    end
+    counter += 1
+    end
+        puts ""
+        puts ""
+      if user_points = 0
+        puts "-----------------------------------------------------------"
+        puts "The worst effort ever! Your final score was #{user_points} out of 10! Try again!"
+        puts "-----------------------------------------------------------"
+      elsif user_points <= 5
+        puts "-----------------------------------------------------------"
+        puts "Horrible effort your final score was #{user_points} out of 10! Try again!"
+        puts "-----------------------------------------------------------"
+      elsif user_points > 5 && user_points < 10
+        puts "-----------------------------------------------------------"
+        puts "Great effor your your final score was #{user_points} out of 10!"
+        puts "-----------------------------------------------------------"
+      else user_points == 10 
+        puts "-----------------------------------------------------------"
+        puts "Amazing you got #{user_points} out of 10!!!!"
+        puts "-----------------------------------------------------------"
+        puts ""
+        puts ""
+    end
+  end
+
+  def run_quiz 
+    puts "" 
+    puts "Hello, and welcome to the movie quotes quiz!"
+    puts ""
+    quiz 
   end
 
 
