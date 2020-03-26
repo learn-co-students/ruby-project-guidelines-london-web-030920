@@ -38,6 +38,7 @@ class CommandLineInterface
       puts "q - list all quotes"
       puts "c - list all characters"
       puts "f - find movie, quote or character"
+      user_command(command)
     end
 
     def user_command(command)
