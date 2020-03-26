@@ -4,7 +4,7 @@ Movie.create(title: "The Truman Show", year: 1998, genre: "Drama")
 
 Movie.create(title: "Star Wars: Empire Strikes Back", year: 1980, genre: "SciFi")
 
-Movie.create(title: "Brockback Mountain", year: 2005, genre: "Romantic")
+Movie.create(title: "Brokeback Mountain", year: 2005, genre: "Romantic")
 
 Movie.create(title: "Step Brothers", year: 2005, genre: "Comedy")
 

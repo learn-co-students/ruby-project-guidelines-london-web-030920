@@ -276,29 +276,47 @@ end
       puts ""
       found_movie = Movie.find_by(title: movie_title)
       if !found_movie
-        puts "Oh no! Thats not right. Your score is still #{user_points}!"
-        puts ""
-        puts ""
-      else
-      if found_movie.quotes.select{ |q| q == quote}
-        user_points += 1
-        puts ""
-        puts "--------------------------------------------"
-        puts "Well done! Your score is now #{user_points}!"
-        puts "--------------------------------------------"
-        puts ""
-      else
         puts "-----------------------------------------------------------"
         puts "Oh no! Thats not right. Your score is still #{user_points}!"
         puts "-----------------------------------------------------------"
+      else
+        if found_movie.quotes.select{ |q| q == quote}
+          user_points += 1
+          puts ""
+          puts "--------------------------------------------"
+          puts "Well done! Your score is now #{user_points}!"
+          puts "--------------------------------------------"
+          puts ""
+        else
+          puts "-----------------------------------------------------------"
+          puts "Oh no! Thats not right. Your score is still #{user_points}!"
+          puts "-----------------------------------------------------------"
+          puts ""
+        end
+    end
+    counter += 1
+    end
         puts ""
-      end
-      counter += 1
-    end
-    end
+        puts ""
+      if user_points = 0
         puts "-----------------------------------------------------------"
-        puts "Well done your final score was #{user_points} out of 10!"
+        puts "The worst effort ever! Your final score was #{user_points} out of 10! Try again!"
         puts "-----------------------------------------------------------"
+      elsif user_points <= 5
+        puts "-----------------------------------------------------------"
+        puts "Horrible effort your final score was #{user_points} out of 10! Try again!"
+        puts "-----------------------------------------------------------"
+      elsif user_points > 5 && user_points < 10
+        puts "-----------------------------------------------------------"
+        puts "Great effor your your final score was #{user_points} out of 10!"
+        puts "-----------------------------------------------------------"
+      else user_points == 10 
+        puts "-----------------------------------------------------------"
+        puts "Amazing you got #{user_points} out of 10!!!!"
+        puts "-----------------------------------------------------------"
+        puts ""
+        puts ""
+    end
   end
 
   def run_quiz 
