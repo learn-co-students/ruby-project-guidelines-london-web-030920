@@ -10,6 +10,7 @@ contract_2 = Contract.second
 contract_3 = Contract.third
 contract_4 = Contract.fourth
 
+# binding.pry
 
 cli = CommandLineInterface.new
 cli.screen1

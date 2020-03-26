@@ -10,11 +10,11 @@ class Player < ActiveRecord::Base
 
     def self.all_players
             all_players = self.all.map{|player| player.name}
-            all_players.join(" ")
             
     end
 
 ####################ALL PLAYER METHODS ###################### ALL PLAYER METHODS #######################
+
 
     def self.all_players_by_contracts                       #creates a hash that gives all the players contracts
         hash = {}
@@ -35,10 +35,6 @@ class Player < ActiveRecord::Base
         puts "#{most_expensive.name} = £#{self.most_expensive_wage.wage} per second"            #returns the most_expensive player name and the most_expensive_wage amount
     end
 
-    # def self.longest_injury
-    #     # self.all_injured_players.each{|player|player.injury.length}
-
-    # end
 
         ######### INJURIES METHODS ############# INJURIES METHODS ###########
    
@@ -49,23 +45,19 @@ class Player < ActiveRecord::Base
         total_days_injured
     end
 
-    # def expected_days_from_injury_return(player)
-
-    # end
-
     def self.all_injured_players                                                #returns on separate lines each injured player in the players table
         all_injured_players = Player.all.select{|player| player.injured?}
-       puts  all_injured_players.map{|player| player.name}
+        # puts  all_injured_players.map{|player| player.name}
     end
 
-    ################## CONTRACT METHODS #################### CONTRACT METHODS #######################
+    def self.longest_injury
+         longest_injury = self.all_injured_players.map{|player|player.injury_length}.max
 
-
-# most contracts
+    end
 
 #################### INDIVIDUAL PLAYER METHODS ########### INDIVIDUAL PLAYER METHODS #######################
 
-    def team
+    def find_team
     current_team = self.teams.map{|team| team.name}    #returns players current team as a string by mapping through the teams played for and returning the first array element
     current_team[0]
     end
@@ -74,11 +66,15 @@ class Player < ActiveRecord::Base
     self.position
     end
 
-    def number_of_teams_played_for  #looks at players teams, calculates the unique number of teams played for.
-        self.teams.all.uniq.count
+    def previous_teams_played_for  #looks at players teams, calculates the unique number of teams played for.
+        teams = self.teams.all.uniq
+       team_array = teams.map{|team| team.name}
+       team_array[1..-1].join(", ")
     end
 
-# current contract
+    def number_of_teams_played_for
+        self.teams.all.uniq.count
+    end
 
 end
 
