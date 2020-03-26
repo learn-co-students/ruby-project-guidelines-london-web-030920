@@ -36,9 +36,9 @@ def greet
 
           when 2
             screen4_all_teams
+            
           when 3
-            # Functionality for Choice 3 goes here
-            puts "Searching for all contracts..."
+            screen6_all_contracts
 
           when 4
             create_new
@@ -216,7 +216,6 @@ end
               key(:injury_start).ask('What date did the injury occur?', default: nil)
               key(:injury_predicted_end).ask('What date do they expect to be fit again?', default: nil)
             
-              # Player.create(name: name, age: age, position: position, injury_start: start_date, injury_predicted_end: end_date)
               end
            
               Player.create(name: new_player[:name], age: new_player[:age], position: new_player[:position], injured: new_player[:injured], injury_start: new_player[:injury_start], injury_predicted_end: new_player[:injury_predicted_end])
@@ -227,12 +226,29 @@ end
               key(:name).ask('Team name?', required: true)
               key(:founded).ask('What year was this team founded in?', convert: :int, required: true)
               key(:cups_won).ask('How many cups has this team won?', convert: :int, required: true)
-              # Player.create(name: name, age: age, position: position, injury_start: start_date, injury_predicted_end: end_date)
+              
               end
              
               Team.create(name: new_team[:name], founded: new_team[:founded], cups_won: new_team[:cups_won])
               
             when 3
+              puts "You need to have made a player and a team before creating a contract!"
+              new_contract = $prompt.collect do
+                key(:start_day).ask('Start date:', convert: :date, required: true)
+                key(:end_day).ask('End date:', convert: :date, required: true)
+                key(:wage).ask('Wage: £', convert: :int, required: true)
+                key(:transfer_fee).ask('Transfer Fee:', convert: :int, required: true)
+                
+                key(:player_surname).ask('What is their surname?', required: true)
+                key(:team_name).ask('What is the name of their team?', required: true)
+              
+                end
+                player_name_check = new_player[:name]
+                team_name_check = new_team[:name]
+                id_of_player = Player.find_player(player_name_check)
+                id_of_team = Team.find_team(team_name_check)
+                binding.pry
+                 Contract.create(start_day: new_contract[:start_day], end_day: new_contract[:end_day], wage: new_contract[:wage], transfer_fee: new_contract[:transfer_fee], player_id: id_of_player.id, team_id: id_of_team.id)
 
             when 4
           end

@@ -2,7 +2,10 @@ class Team < ActiveRecord::Base
     has_many :contracts
     has_many :players, through: :contracts
 
-  
+    def self.find_team(name) 
+        Team.all.find{|team| team.name == name}
+    end
+
     def team_contract
         Contract.all.select {|contract| contract.team_id == self.id}
      end
