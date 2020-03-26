@@ -20,7 +20,8 @@ def greet
       {name: 'Search for all players in database', value: 1},
       {name: 'Search all teams', value: 2},
       {name: 'Search all contracts', value: 3},
-      {name: "Exit", value: 4}]
+      {name: 'Create new player, team or contract', value: 4},
+      {name: "Exit", value: 5}]
 
     user_input = $prompt.select("Select an action?", screen2)
 
@@ -36,6 +37,9 @@ def greet
       puts "Searching for all contracts..."
 
     when 4
+      create_new
+
+    when 5
         $prompt.yes?('Are you sure?')
        system "clear"
     end
@@ -63,6 +67,8 @@ def greet
        
         when 1
           is_injured?
+          $prompt.keypress("Resumes automatically in :countdown ...", timeout: 3)
+          $prompt.select("Select an action?", screen3)
     
         when 2
           puts "Current team: #{found_player.find_team}"
@@ -99,7 +105,7 @@ def greet
         screen4 = [
           {name: 'Which team has won the most cups?', value: 1},
           {name: 'Who is currently injured?', value: 2},
-          {name: 'Current position', value: 3},
+          {name: 'Average wage of the team', value: 3},
           {name: "Back to homepage", value: 4},
           {name: "Exit", value: 5}]
     
@@ -132,6 +138,44 @@ def greet
       end
 
 end
+
+
+    def create_new
+      system "clear"
+
+      screen5 = [
+        {name: 'Create new player', value: 1},
+        {name: 'Create new team', value: 2},
+        {name: 'Create new contract', value: 3},
+        {name: 'Back', value: 4}
+      ]
+  
+      user_input = $prompt.select("What would you like to add?", screen5)
+  
+          case user_input
+          when 1
+           new_player = $prompt.collect do
+              key(:name).ask('Surname?', required: true)
+              key(:age).ask('Age?', convert: :int, required: true)
+              key(:position).ask('Position?', required: true)
+              key(:injured).ask('Injured?', convert: :bool, required: true)
+              puts "If the player is not injured, simply press return for the next two questions."
+              key(:injury_start).ask('What date did the injury occur?', default: nil)
+              key(:injury_predicted_end).ask('What date do they expect to be fit again?', default: nil)
+            
+              # Player.create(name: name, age: age, position: position, injury_start: start_date, injury_predicted_end: end_date)
+              end
+              binding.pry
+              Player.create(name: new_player[:name], age: new_player[:age], position: new_player[:position], injured: new_player[:injured], injury_start: new_player[:injury_start], injury_predicted_end: new_player[:injury_predicted_end])
+              
+          when 2
+
+          when 3
+
+          when 4
+
+    end
+  end
 
 
 
