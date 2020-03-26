@@ -1,3 +1,5 @@
+#################### GREETING AND KEY LISTS ###########################################
+
 class CommandLineInterface
 
   def opening_greeting
@@ -45,6 +47,7 @@ class CommandLineInterface
     puts "6. Find movie, quote or character"
     puts "7. Find or create quote"
     puts "8. Delete movie, quote or character"
+    puts "9. To try out the quiz!"
     
     puts "exit or x - To exit application"
   end
@@ -81,6 +84,8 @@ class CommandLineInterface
       find_or_create
     when "8" #delete
       delete
+    when "9" #delete
+      quiz
     when "exit"
       puts ""
       a = Artii::Base.new :font => 'slant'
@@ -88,6 +93,9 @@ class CommandLineInterface
       exit 0
   end
 end
+
+#################### GREETING AND KEY LISTS ###########################################
+############################ METHODS ##################################################
 
 def find_by_character_movie_or_quote 
   puts ""
@@ -246,6 +254,41 @@ end
     puts ""
     puts "List of #{title}:"
     puts "----------------"
+  end
+
+  def quiz 
+    user_points = 0
+
+    puts "" 
+    puts "Hello, and welcome to the movie quotes quiz!"
+    puts ""
+
+    while 
+      puts "What movie is this quote from?"
+      puts ""
+      quote = Quote.all.sample
+      puts quote.line 
+      puts ""
+      puts "Put your answer here:"
+      puts ""
+      movie = gets.chomp
+      puts ""
+      found_movie = Movie.find_by(title: movie)
+      if found_movie.quote = quote
+        user_points += 1
+        puts "Well done! Your score is now #{user_points}!"
+        puts ""
+      else 
+        puts "Oh no! Thats not right. Your score is still #{user_points}!"
+        puts ""
+      end
+      puts "Press any button to continue, and 'exit' to exit."
+      command = gets.chomp
+      puts ""
+      if command = exit
+        puts "Well done, your final score was #{user_points}!"
+        exit 0 
+      end
   end
 
 
