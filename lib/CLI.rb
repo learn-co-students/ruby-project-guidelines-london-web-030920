@@ -85,7 +85,7 @@ class CommandLineInterface
     when "8" #delete
       delete
     when "9" #delete
-      quiz
+      run_quiz 
     when "exit"
       puts ""
       a = Artii::Base.new :font => 'slant'
@@ -256,39 +256,56 @@ end
     puts "----------------"
   end
 
+################# quiz #####################
+  
+  
   def quiz 
+    counter = 0
     user_points = 0
 
-    puts "" 
-    puts "Hello, and welcome to the movie quotes quiz!"
-    puts ""
-
-    while 
-      puts "What movie is this quote from?"
+    while counter < 10
+     
+      puts "Question #{counter + 1}. What movie is this quote from?"
       puts ""
-      quote = Quote.all.sample
-      puts quote.line 
+      quote = Quote.all.sample.line
+      puts quote
       puts ""
       puts "Put your answer here:"
       puts ""
-      movie = gets.chomp
+      movie_title = gets.chomp
       puts ""
-      found_movie = Movie.find_by(title: movie)
-      if found_movie.quote = quote
-        user_points += 1
-        puts "Well done! Your score is now #{user_points}!"
-        puts ""
-      else 
+      found_movie = Movie.find_by(title: movie_title)
+      if !found_movie
         puts "Oh no! Thats not right. Your score is still #{user_points}!"
         puts ""
+        puts ""
+      else
+      if found_movie.quotes.select{ |q| q == quote}
+        user_points += 1
+        puts ""
+        puts "--------------------------------------------"
+        puts "Well done! Your score is now #{user_points}!"
+        puts "--------------------------------------------"
+        puts ""
+      else
+        puts "-----------------------------------------------------------"
+        puts "Oh no! Thats not right. Your score is still #{user_points}!"
+        puts "-----------------------------------------------------------"
+        puts ""
       end
-      puts "Press any button to continue, and 'exit' to exit."
-      command = gets.chomp
-      puts ""
-      if command = exit
-        puts "Well done, your final score was #{user_points}!"
-        exit 0 
-      end
+      counter += 1
+    end
+    end
+        puts "-----------------------------------------------------------"
+        puts "Well done your final score was #{user_points} out of 10!"
+        puts "-----------------------------------------------------------"
+  end
+
+  def run_quiz 
+    puts "" 
+    puts "Hello, and welcome to the movie quotes quiz!"
+    puts ""
+    quiz 
   end
 
 
