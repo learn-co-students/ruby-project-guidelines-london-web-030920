@@ -36,7 +36,7 @@ def greet
 
           when 2
             screen4_all_teams
-            
+
           when 3
             screen6_all_contracts
 
@@ -243,6 +243,7 @@ end
                 key(:team_name).ask('What is the name of their team?', required: true)
               
                 end
+
                 player_name_check = new_player[:name]
                 team_name_check = new_team[:name]
                 id_of_player = Player.find_player(player_name_check)
@@ -254,10 +255,13 @@ end
           end
     end
   
+Team search - Real Madrid      - Team look up real madrid. Instance of real madrid into the team my favourites section
 
 
-                    ################### BOTTOM METHODS TEAMS MENU ########################
 
+                     ################### METHODS MENU ########################
+                     ################### METHODS MENU ########################
+                     ################### METHODS MENU ########################
 
 
     def is_injured?
