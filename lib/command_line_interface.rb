@@ -16,13 +16,13 @@ def greet
   def screen2_selection
     system "clear"
 
-    @screen2 = [
+    screen2 = [
       {name: 'Search for all players in database', value: 1},
       {name: 'Search all teams', value: 2},
       {name: 'Search all contracts', value: 3},
       {name: "Exit", value: 4}]
 
-    user_input = $prompt.select("Select an action?", @screen2)
+    user_input = $prompt.select("Select an action?", screen2)
 
         case user_input
    
@@ -50,14 +50,14 @@ def greet
         found_player = Player.find{|player| player.name == @player_selection}
         puts found_player.name
 
-     @screen3 = [
+     screen3 = [
           {name: 'Is the player injured?', value: 1},
           {name: 'Teams past and present', value: 2},
           {name: 'Current position', value: 3},
           {name: "Back to homepage", value: 4},
           {name: "Exit", value: 5}]
     
-        user_input = $prompt.select("Select an action?", @screen3)
+        user_input = $prompt.select("Select an action?", screen3)
     
             case user_input
        
@@ -90,8 +90,46 @@ def greet
 
       def screen4_all_teams
 
+        system "clear"
 
+      @team_selection = gets.chomp
 
+      found_team = Team.find{|team| team.name == @team_selection}
+
+        screen4 = [
+          {name: 'Which team has won the most cups?', value: 1},
+          {name: 'Who is currently injured?', value: 2},
+          {name: 'Current position', value: 3},
+          {name: "Back to homepage", value: 4},
+          {name: "Exit", value: 5}]
+    
+        user_input = $prompt.select("Select an action?", screen4)
+
+        case user_input
+       
+        when 1
+          
+          puts oldest_team
+    
+        when 2
+         if found_team.all_injuries.count == 0
+            puts "This team has great medical staff, no injured players!"
+            else 
+            found_team.injured_players
+            end
+       
+
+        when 3
+         
+    
+        when 4
+          screen2_selection
+
+        when 5
+          
+        end
+
+      end
 
 end
 
@@ -108,4 +146,4 @@ end
     end
 
 
-end
+
