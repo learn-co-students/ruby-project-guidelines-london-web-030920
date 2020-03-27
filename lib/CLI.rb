@@ -264,11 +264,14 @@ end
     user_points = 0
 
     while counter < 10
-     
+      puts ""
+      puts ""
+      puts "------------------------"
       puts "Question #{counter + 1}. What movie is this quote from?"
       puts ""
-      quote = Quote.all.sample.line
+      quote = "#{Quote.all.sample.line}"
       puts quote
+      puts "-----------------------"
       puts ""
       puts "Put your answer here:"
       puts ""
@@ -328,5 +331,3 @@ end
 
 
 end
-
-xxxxccvadgdfghsfthgfhs

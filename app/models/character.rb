@@ -8,4 +8,14 @@ class Character < ActiveRecord::Base
         Quote.all.delete(found_quote)
     end
 
+
+    def self.longest_name
+        Character.all.max_by{|c| c.name }
+    end
+
+
+    def all_female
+        Character.all.select{|c| c.gender == "M"}
+    end
+
 end
