@@ -1,8 +1,13 @@
 require "tty-prompt"
 class CommandLineInterface
- $prompt = TTY::Prompt.new
+ $prompt = TTY::Prompt.new # initialize instead of global
 
+ def initialize
+   @favourite_team = []
+   @favourite_player = []
+ end
 def greet
+  system "clear"
     puts "Welcome to Focus Football, the best resource for football information in the world! "
     puts ""
   end
@@ -25,7 +30,8 @@ def greet
       {name: 'Search all teams', value: 2},
       {name: 'Search all contracts', value: 3},
       {name: 'Create new player, team or contract', value: 4},
-      {name: "Exit", value: 5}]
+      {name: 'My favourites', value: 5},
+      {name: "Exit", value: 6}]
 
     user_input = $prompt.select("Select an action?", screen2)
 
@@ -44,6 +50,9 @@ def greet
             create_new
 
           when 5
+            my_favourites
+
+          when 6
               $prompt.yes?('Are you sure?')
             system "clear"
           end
@@ -65,13 +74,13 @@ def greet
           puts "This player does not exist yet!"
           puts "Please navigate to the bottom of the homepage to create this new player!"
           $prompt.keypress("Resumes automatically in :countdown ...", timeout: 5)
-          screen2_selection
+          screen2_back
         end
 
       screen3 = [
           {name: 'Is the player injured?', value: 1},
-          {name: 'Teams past and present', value: 2},
-          {name: 'Current position', value: 3},
+          {name: 'Teams past and present?', value: 2},
+          {name: 'Current position?', value: 3},
           {name: "Back to homepage", value: 4},
           {name: "Exit", value: 5}]
     
@@ -81,8 +90,8 @@ def greet
        
               when 1
                 is_injured?
-                $prompt.keypress("Resumes automatically in :countdown ...", timeout: 3)
-                $prompt.select("Select an action?", screen3)
+
+                screen2_back
           
               when 2
                 if found_player.number_of_teams_played_for > 1
@@ -94,12 +103,12 @@ def greet
                 else
                   puts "Has no current team."
                 end
-
+                screen2_back
               when 3
                 puts "Current position: #{found_player.position}."
-          
+                screen2_back
               when 4
-                screen2_selection
+                screen2_back
 
               when 5
                 $prompt.yes?('Are you sure?')
@@ -128,19 +137,19 @@ def greet
           puts "This team does not exist yet!"
           puts "Please navigate to the bottom of the homepage to create this new team!"
           $prompt.keypress("Resumes automatically in :countdown ...", timeout: 5)
-          screen2_selection
+          screen2_back
         end
 
         @screen4 = [
           {name: 'Which team has won the most cups?', value: 1},
           {name: 'Who is currently injured?', value: 2},
-          {name: 'Average wage of the team:', value: 3},
-          {name: 'Total wages of whole team:', value: 4},
-          {name: 'Most expensive player:', value: 5},
-          {name: 'Highest earning player:', value: 6},
-          {name: 'Lowest earning player:', value: 7},
-          {name: 'Oldest player:', value: 8},
-          {name: 'Youngest player:', value: 9},
+          {name: 'Average wage of the team?', value: 3},
+          {name: 'Total wages of whole team?', value: 4},
+          {name: 'Most expensive player?', value: 5},
+          {name: 'Highest earning player?', value: 6},
+          {name: 'Lowest earning player?', value: 7},
+          {name: 'Oldest player?', value: 8},
+          {name: 'Youngest player?', value: 9},
           {name: "Back to homepage", value: 10},
           {name: "Exit", value: 11}]
     
@@ -149,38 +158,38 @@ def greet
         case user_input
           when 1
             puts found_team.most_cup_wins
-            screen4_back
+            screen2_back
           when 2
             if found_team.all_injuries.count == 0
               puts "This team has great medical staff, no injured players!"
               else 
               found_team.injured_players
               end
-            screen4_back
+              screen2_back
        
           when 3  
             puts found_team.average_wage_of_team
             screen4_back
           when 4
             puts found_team.total_of_team_wage
-            screen4_back
+            screen2_back
           when 5
             puts found_team.most_expensive_player
-            screen4_back
+            screen2_back
           when 6
             puts found_team.highest_earner
-            screen4_back
+            screen2_back
           when 7
             puts found_team.lowest_earner
-            screen4_back
+            screen2_back
           when 8
             puts found_team.oldest_player
-            screen4_back
+            screen2_back
           when 9
             puts found_team.youngest_player
-            screen4_back
+            screen2_back
           when 10
-            screen2_selection
+            screen2_back
         
           when 11
             
@@ -215,11 +224,11 @@ end
               puts "If the player is not injured, simply press return for the next two questions."
               key(:injury_start).ask('What date did the injury occur?', default: nil)
               key(:injury_predicted_end).ask('What date do they expect to be fit again?', default: nil)
-            
+          
               end
-           
               Player.create(name: new_player[:name], age: new_player[:age], position: new_player[:position], injured: new_player[:injured], injury_start: new_player[:injury_start], injury_predicted_end: new_player[:injury_predicted_end])
-        
+              screen2_back
+
             when 2
             
             new_team = $prompt.collect do
@@ -230,7 +239,7 @@ end
               end
              
               Team.create(name: new_team[:name], founded: new_team[:founded], cups_won: new_team[:cups_won])
-              
+              screen2_back
             when 3
               puts "You need to have made a player and a team before creating a contract!"
               new_contract = $prompt.collect do
@@ -241,24 +250,61 @@ end
                 
                 key(:player_surname).ask('What is their surname?', required: true)
                 key(:team_name).ask('What is the name of their team?', required: true)
-              
+                
                 end
 
                 player_name_check = new_player[:name]
                 team_name_check = new_team[:name]
                 id_of_player = Player.find_player(player_name_check)
                 id_of_team = Team.find_team(team_name_check)
-                binding.pry
-                 Contract.create(start_day: new_contract[:start_day], end_day: new_contract[:end_day], wage: new_contract[:wage], transfer_fee: new_contract[:transfer_fee], player_id: id_of_player.id, team_id: id_of_team.id)
-
+                
+                Contract.create(start_day: new_contract[:start_day], end_day: new_contract[:end_day], wage: new_contract[:wage], transfer_fee: new_contract[:transfer_fee], player_id: id_of_player.id, team_id: id_of_team.id)
+                screen2_back
+                
             when 4
+              screen2_back
           end
     end
   
-Team search - Real Madrid      - Team look up real madrid. Instance of real madrid into the team my favourites section
+                    ################### MY FAVOURITES #######################
+                    ################### MY FAVOURITES #######################
+                    ################### MY FAVOURITES #######################
 
+  def my_favourites
+    system "clear"
 
+    screen6 = [
+      {name: 'Select your favourite players', value: 1},
+      {name: 'Select your favourite team', value: 2},
+      {name: 'Your chosen favourites', value: 3},
+      {name: 'Delete all', value: 4},
+      {name: 'Back', value: 5}
+                    ]
+                
+      user_input = $prompt.select("What would you like to select?", screen6)
+                
+      case user_input
 
+        when 1
+          choose_favourite_player
+          screen2_back
+        when 2
+          choose_favourite_team
+          screen2_back
+        when 3
+
+          favourites_list
+          my_favourites
+          screen2_back
+        when 4
+          $prompt.yes?('Are you sure? This will clear your my favourites list.')
+          favourite_player.clear
+          favourite_team.clear
+          screen2_back
+        when 5
+          screen2_back
+      end 
+   end                       
                      ################### METHODS MENU ########################
                      ################### METHODS MENU ########################
                      ################### METHODS MENU ########################
@@ -273,7 +319,46 @@ Team search - Real Madrid      - Team look up real madrid. Instance of real madr
         end
     end
 
-def screen4_back
-    $prompt.keypress("Resumes automatically in :countdown ...", timeout: 3)
-    $prompt.select("Select an action?", @screen4)
+
+
+def screen2_back
+  $prompt.keypress("Resumes automatically in :countdown ...", timeout: 5)
+  $prompt.select("Select an action?", screen2_selection)
 end
+
+def choose_favourite_player
+  favourite_player = []
+  puts "Choose your favourite players: "
+  player_name = gets.chomp 
+  player = Player.find_player(player_name)
+  @favourite_player << player.name
+  output_favourite_player
+  my_favourites
+end
+
+def choose_favourite_team
+  @favourite_team = []
+  puts "Choose your favourite team: "
+  team_name = gets.chomp 
+  team = Team.find_team(team_name)
+  @favourite_team << team.name 
+  output_favourite_team 
+  my_favourites
+end
+
+def output_favourite_team
+@favourite_team.each{|team| puts team}
+end
+
+def favourites_list
+  puts "Your favourite players are:"
+  output_favourite_player
+  puts ""
+  puts "Your favourite team is: " 
+  output_favourite_team 
+  screen2_back
+end
+
+def output_favourite_player
+  @favourite_player.each{|player| puts player}
+  end
