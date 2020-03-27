@@ -320,11 +320,8 @@ end
                     ################### CONTRACTS MENU ########################
 def screen7_all_contracts
   screen7 = [
-    {name: 'Select your favourite players', value: 1},
-    {name: 'Select your favourite team', value: 2},
-    {name: 'Your chosen favourites', value: 3},
-    {name: 'Delete all', value: 4},
-    {name: 'Back', value: 5}
+    {name: 'Wage total per week', value: 1},
+    {name: 'Back', value: 2}
                   ]
               
     user_input = $prompt.select("What would you like to select?", screen7)
@@ -332,7 +329,8 @@ def screen7_all_contracts
     case user_input
     when 1
       puts "A total of £#{Contract.total_wage_amount} is spent per week on wages."
-
+    when 2
+      screen2_back
     end
 end
 
