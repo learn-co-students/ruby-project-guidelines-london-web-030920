@@ -10,12 +10,20 @@ class Character < ActiveRecord::Base
 
 
     def self.longest_name
-        Character.all.max_by{|c| c.name }
+        Character.all.max_by{|c| c.name.length }.name
+    end
+
+    def self.shortest_name
+        Character.all.min_by{|c| c.name.length }.name
     end
 
 
-    def all_female
-        Character.all.select{|c| c.gender == "M"}
+    def self.all_female
+        Character.all.select{|c| c.sex == "F"}.map{|female_name| female_name.name}
+    end
+
+    def self.all_male
+        Character.all.select{|c| c.sex == "M"}.map{|male_name| male_name.name}
     end
 
 end
