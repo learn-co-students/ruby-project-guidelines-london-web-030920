@@ -66,9 +66,7 @@ class CommandLineInterface
       puts Quote.all.map{|q| q.line}
       puts ""
     when "3" #characters
-      row_title("characters")
-      puts Character.all.map{|c| c.name}
-      puts ""
+      display_characters
     when "4" #genre
       display_genre_quotes_and_movies 
       puts""
@@ -197,6 +195,38 @@ def create_or_find_character_and_quote(movie)
       puts ""
       new_quote = gets.chomp
       Quote.create(line: new_quote, movie_id: found_movie.id, character_id: created_character.id)
+    end
+end
+
+def display_characters
+  row_title("characters")
+      puts Character.all.map{|c| c.name}
+      puts ""
+      puts "For more character options press 'o' or press any other key to exit."
+      character_options
+end
+
+def character_options
+    option = gets.chomp
+    puts ""
+      if option == "o"
+      puts "For all male characters press 'm'" 
+      puts "For all female characters press 'f'"
+      puts "For longest name press 'l'"
+      puts "For shortest name press 's'"
+      character_option = gets.chomp
+      puts ""
+      case character_option
+        when "m"
+        puts Character.all_male
+        when "f"
+        puts Character.all_female
+        when "l"
+        puts Character.longest_name
+        when "s"
+        puts Character.shortest_name   
+      end
+      puts ""
     end
 end
 
@@ -331,5 +361,3 @@ end
 
 
 end
-
-xxxxccvadgdfghsfthgfhs
