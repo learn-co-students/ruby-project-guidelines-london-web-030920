@@ -7,8 +7,6 @@ class CommandLineInterface
    @favourite_player = []
  end
 
-
-
 def greet
   system "clear"
   a = Artii::Base.new :font => 'slant'
@@ -49,7 +47,7 @@ def greet
             screen4_all_teams
 
           when 3
-            screen6_all_contracts
+            screen7_all_contracts
 
           when 4
             create_new
@@ -58,8 +56,7 @@ def greet
             my_favourites
 
           when 6
-            $prompt.yes?('Are you sure?')
-            system "clear"
+            exit_all
           end
 
     end
@@ -86,8 +83,8 @@ def greet
           {name: 'Is the player injured?', value: 1},
           {name: 'Teams past and present?', value: 2},
           {name: 'Current position?', value: 3},
-          {name: "Back to homepage", value: 4},
-          {name: "Exit", value: 5}]
+          {name: "Update player position", value: 4},
+          {name: "Back", value: 5}]
     
       user_input = $prompt.select("Select an action?", screen3)
     
@@ -113,11 +110,18 @@ def greet
                 puts "Current position: #{found_player.position}."
                 screen2_back
               when 4
+                system "clear"
+                  puts "#{@player_selection} currently plays #{found_player.position}."
+
+                user = Player.find_by(name: @player_selection)
+                  puts "What position have they changed to?"
+                  choices = %w(Goalkeeper Striker Midfielder Defender)
+                  new_position = $prompt.select("Select position?", choices)
+                user.update(position: new_position)
                 screen2_back
 
               when 5
-                $prompt.yes?('Are you sure?')
-                system "clear"
+                screen2_back
               end
 
   # goes to menu with options for
@@ -197,8 +201,7 @@ def greet
             screen2_back
         
           when 11
-            $prompt.yes?('Are you sure?')
-            system "clear"
+            screen2_back
           end
 
       end
@@ -310,7 +313,30 @@ end
         when 5
           screen2_back
       end 
-   end                       
+   end    
+  
+                    ################### CONTRACTS MENU ########################
+                    ################### CONTRACTS MENU ########################
+                    ################### CONTRACTS MENU ########################
+def screen7_all_contracts
+  screen7 = [
+    {name: 'Select your favourite players', value: 1},
+    {name: 'Select your favourite team', value: 2},
+    {name: 'Your chosen favourites', value: 3},
+    {name: 'Delete all', value: 4},
+    {name: 'Back', value: 5}
+                  ]
+              
+    user_input = $prompt.select("What would you like to select?", screen7)
+              
+    case user_input
+    when 1
+      puts "A total of £#{Contract.total_wage_amount} is spent per week on wages."
+
+    end
+end
+
+
                      ################### METHODS MENU ########################
                      ################### METHODS MENU ########################
                      ################### METHODS MENU ########################
@@ -367,4 +393,9 @@ end
 
 def output_favourite_player
   @favourite_player.each{|player| puts player}
+  end
+
+  def exit_all
+    $prompt.yes?('Are you sure?')
+    system "clear"
   end
