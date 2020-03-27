@@ -6,8 +6,13 @@ class CommandLineInterface
    @favourite_team = []
    @favourite_player = []
  end
+
+
+
 def greet
   system "clear"
+  a = Artii::Base.new :font => 'slant'
+  puts a.asciify('Focus Football !')
     puts "Welcome to Focus Football, the best resource for football information in the world! "
     puts ""
   end
@@ -53,7 +58,7 @@ def greet
             my_favourites
 
           when 6
-              $prompt.yes?('Are you sure?')
+            $prompt.yes?('Are you sure?')
             system "clear"
           end
 
@@ -192,7 +197,8 @@ def greet
             screen2_back
         
           when 11
-            
+            $prompt.yes?('Are you sure?')
+            system "clear"
           end
 
       end
@@ -260,7 +266,7 @@ end
                 
                 Contract.create(start_day: new_contract[:start_day], end_day: new_contract[:end_day], wage: new_contract[:wage], transfer_fee: new_contract[:transfer_fee], player_id: id_of_player.id, team_id: id_of_team.id)
                 screen2_back
-                
+
             when 4
               screen2_back
           end
@@ -298,8 +304,8 @@ end
           screen2_back
         when 4
           $prompt.yes?('Are you sure? This will clear your my favourites list.')
-          favourite_player.clear
-          favourite_team.clear
+          @favourite_player.clear
+          @favourite_team.clear
           screen2_back
         when 5
           screen2_back

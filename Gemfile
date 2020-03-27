@@ -7,3 +7,4 @@ gem "pry"
 gem "require_all"
 gem "rake"
 gem "tty-prompt"
+gem 'artii', '~> 2.1', '>= 2.1.2'
